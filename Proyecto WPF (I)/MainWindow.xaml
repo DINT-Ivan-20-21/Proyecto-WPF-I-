@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabItem Header="Jugar"></TabItem>
+            <TabItem Header="Gestionar">
+                <DockPanel>
+                    <DockPanel DockPanel.Dock="Bottom" Height="70"></DockPanel>
+                    <DockPanel DockPanel.Dock="Right" Width="150"></DockPanel>
+                    <DockPanel DockPanel.Dock="Bottom"
+                               Height="100"></DockPanel>
+                    <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding Imagen}" />
+                                    <TextBlock Text="{Binding Titulo}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,21 @@ namespace Proyecto_WPF__I_
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Pelicula> peliculas;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void LeePeliculasJSON(string path)
+        {
+            peliculas = JsonConvert.DeserializeObject<List<Pelicula>>(File.ReadAllText(path));
+        }
+
+        public void EscribePeliculasJSON(string path)
+        {
+            File.WriteAllText(path, JsonConvert.SerializeObject(peliculas));
         }
     }
 }
