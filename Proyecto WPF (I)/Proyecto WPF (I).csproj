@@ -66,12 +66,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BackgroundConverter.cs" />
+    <Compile Include="DificultadConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Partida.cs" />
     <Compile Include="Pelicula.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -98,6 +101,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\flecha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\placeholder.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\action.png" />
+    <Resource Include="assets\comedy.png" />
+    <Resource Include="assets\drama.png" />
+    <Resource Include="assets\horror.png" />
+    <Resource Include="assets\sci_fi.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
