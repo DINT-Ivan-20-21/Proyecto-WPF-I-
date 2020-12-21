@@ -11,9 +11,9 @@ namespace Proyecto_WPF__I_
 {
     public partial class MainWindow : Window
     {
-        Partida partida;
-        Pelicula pelicula;
-        ObservableCollection<Pelicula> peliculas;
+        private Partida partida;
+        private Pelicula pelicula;
+        private ObservableCollection<Pelicula> peliculas;
 
         public MainWindow()
         {
@@ -50,12 +50,20 @@ namespace Proyecto_WPF__I_
 
         private void cambiarPelicula_Click(object sender, RoutedEventArgs e)
         {
-                partida.Indice += int.Parse((sender as Button).Tag.ToString());
+            partida.Indice += int.Parse((sender as Button).Tag.ToString());
         }
         #endregion
 
         #region Gestionar
         private void añadirButton_Click(object sender, RoutedEventArgs e)
+        {
+            pelicula = new Pelicula();
+            gestionarTabItem.DataContext = pelicula;
+            añadirButton.Visibility = Visibility.Hidden;
+            aceptarButton.Visibility = Visibility.Visible;
+        }
+
+        private void aceptarButton_Click(object sender, RoutedEventArgs e)
         {
             if (pelicula.Titulo == default)
             {
@@ -74,19 +82,19 @@ namespace Proyecto_WPF__I_
                 peliculas.Add(new Pelicula(pelicula));
                 pelicula = new Pelicula();
                 gestionarTabItem.DataContext = pelicula;
+
+                añadirButton.Visibility = Visibility.Visible;
+                aceptarButton.Visibility = Visibility.Hidden;
                 MessageBox.Show("La película se añadio correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void eliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (peliculasListBox.SelectedItem != null)
-            {
-                peliculas.Remove(peliculasListBox.SelectedItem as Pelicula);
-                pelicula = new Pelicula();
-                gestionarTabItem.DataContext = pelicula;
-                MessageBox.Show("La película se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            peliculas.Remove(peliculasListBox.SelectedItem as Pelicula);
+            pelicula = new Pelicula();
+            gestionarTabItem.DataContext = pelicula;
+            MessageBox.Show("La película se elimino correctamente", "Información", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void cargarButton_Click(object sender, RoutedEventArgs e)
@@ -167,6 +175,5 @@ namespace Proyecto_WPF__I_
         }
 
         #endregion
-
     }
 }

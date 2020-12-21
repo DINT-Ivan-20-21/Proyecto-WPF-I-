@@ -66,7 +66,7 @@ namespace Proyecto_WPF__I_
                 Action<object> cuenta = (object cantidad) =>
                     {
                         int total = Puntos + (int)cantidad;
-                        while (Puntos <= total)
+                        while (Puntos < total)
                         {
                             Puntos += 5;
                             Thread.Sleep(100);
@@ -99,6 +99,8 @@ namespace Proyecto_WPF__I_
             Pelicula pelicula = new Pelicula();
             pelicula.Imagen = "assets/placeholder.bmp";
             pelicula.EstaValidada = true;
+            pelicula.Pista = "Pista";
+            pelicula._Dificultad = Pelicula.Dificultad.Placeholder;
             ejemplo.Add(pelicula);
             return new Partida(ejemplo);
         }

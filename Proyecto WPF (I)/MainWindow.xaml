@@ -5,7 +5,8 @@
         xmlns:local="clr-namespace:Proyecto_WPF__I_"
         x:Class="Proyecto_WPF__I_.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Icon="assets/icono.ico"
+        Title="Películas"
         MinHeight="600"
         MinWidth="1000">
     <Window.Resources>
@@ -235,10 +236,16 @@
                             </Image>
                         </DockPanel>
                         <!-- Formulario-->
-                        <StackPanel Grid.Column="1"
+                        <Grid Grid.Column="1"
                                     Margin="10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1.5*"/>
+                            </Grid.RowDefinitions>
                             <!-- Puntos y nueva partida-->
-                            <DockPanel Margin="0,15">
+                            <DockPanel Grid.Row="0" Margin="0,15">
                                 <TextBlock Style="{StaticResource Etiqueta}"
                                            DockPanel.Dock="Top"
                                            Text="Puntuación total" />
@@ -251,6 +258,7 @@
                                         Click="nuevaPartidaButton_Click" />
                                 <Border DockPanel.Dock="Left"
                                         HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
                                         BorderBrush="Black"
                                         Background="AliceBlue"
                                         BorderThickness="1"
@@ -270,13 +278,15 @@
                                 </StackPanel>
                             </DockPanel>
                             <!-- Validar jugada -->
-                            <DockPanel Margin="0,15">
+                            <DockPanel Grid.Row="1" Margin="0,15">
                                 <TextBlock DockPanel.Dock="Top"
                                            Style="{StaticResource Etiqueta}"
                                            Text="Título de la película" />
                                 <Button x:Name="validarButton"
                                         Width="60"
+                                        Height="20"
                                         DockPanel.Dock="Right"
+                                        VerticalAlignment="Top"
                                         Content="Validar"
                                         Click="validarButton_Click"
                                         Margin="5,0,0,0">
@@ -292,10 +302,10 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                <TextBox x:Name="respuestaTextBox" />
+                                <TextBox VerticalAlignment="Top" x:Name="respuestaTextBox" />
                             </DockPanel>
                             <!-- Pista -->
-                            <StackPanel Margin="0,15">
+                            <StackPanel Grid.Row="2" Margin="0,15">
                                 <CheckBox x:Name="pistaCheckBox"
                                           Content="Ver pista"
                                           IsChecked="{Binding PeliculaActual.PistaMostrada, Mode=TwoWay}" />
@@ -306,7 +316,7 @@
                                 </Grid>
                             </StackPanel>
                             <!-- Genero -->
-                            <StackPanel>
+                            <StackPanel Grid.Row="3">
                                 <Image Width="130"
                                        Margin="0,0,0,8"
                                        Style="{StaticResource Icono}" />
@@ -314,7 +324,7 @@
                                            TextAlignment="Center"
                                            FontSize="20" />
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </Grid>
                 </DockPanel>
             </TabItem>
@@ -413,16 +423,50 @@
                                     Click="cargarButton_Click" />
                             <Button x:Name="guardarButton"
                                     Content="Guardar en JSON"
-                                    Click="guardarButton_Click" />
+                                    Click="guardarButton_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin"
+                                                Value="5" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=peliculasListBox, Path=Items.Count}"
+                                                         Value="0">
+                                                <Setter Property="IsEnabled"
+                                                        Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                         <StackPanel Orientation="Vertical"
                                     DockPanel.Dock="Top">
                             <Button x:Name="eliminarButton"
                                     Content="Eliminar película"
-                                    Click="eliminarButton_Click" />
-                            <Button x:Name="añadirButton"
-                                    Content="Añadir película"
-                                    Click="añadirButton_Click" />
+                                    Click="eliminarButton_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin"
+                                                Value="5" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=peliculasListBox, Path=SelectedItem}"
+                                                         Value="{x:Null}">
+                                                <Setter Property="IsEnabled"
+                                                        Value="False" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Grid>
+                                <Button x:Name="añadirButton"
+                                        Content="Añadir película"
+                                        Click="añadirButton_Click" />
+                                <Button x:Name="aceptarButton"
+                                        Visibility="Hidden"
+                                        Content="Aceptar"
+                                        Click="aceptarButton_Click" />
+                            </Grid>
                         </StackPanel>
                     </DockPanel>
 

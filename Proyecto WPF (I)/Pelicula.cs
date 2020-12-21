@@ -8,7 +8,8 @@ namespace Proyecto_WPF__I_
         {
             Facil,
             Medio,
-            Díficil
+            Díficil,
+            Placeholder
         }
         public enum Genero
         {
